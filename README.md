@@ -1,7 +1,7 @@
 # SI507
 <b>Instructions for running code:</b><br/>
 It includes three python file and a Data directory.<br/> 
-(1)	You can use the scrape.py to scrape all of the data, if you want to update the data, you can delete the cache.json and re-run this python file, it will generate 4 json into data directory. Please also download the show_theater.csv which includes adjunct table key of musical and theater, because they are many to many relationship, we need adjunct table key to connect those two tables. You also need to get Yelp Fusion API key and client ID by creating an app on Yelp’s Developers site and put them in a python file named secrets.py. Please refer to this link: https://www.yelp.com/developers/documentation/v3/authentication.<br/> 
+(1)	You can use the scrape.py to scrape all of the data, if you want to update the data, you can delete the cache.json and re-run this python file, it will generate 4 json into data directory. Please also download the show_theater.csv which includes junction table key of musical and theater, because they are many to many relationship, we need junction table key to connect those two tables. You also need to get Yelp Fusion API key and client ID by creating an app on Yelp’s Developers site and put them in a python file named secrets.py. Please refer to this link: https://www.yelp.com/developers/documentation/v3/authentication.<br/> 
 (2)	You can run the database.py to update the Browdway_touring_theater.sqlite and import data from Data directory. Or you can use the created database.<br/> 
 (3)	You can run the app.py to use the Flask App. Please put the templates directory, Browdway_touring_theater.sqlite(database) and app.py together.<br/> 
 
