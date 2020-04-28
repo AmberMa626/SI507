@@ -43,6 +43,64 @@ def build_show_url_dict():
     # print(show_url_dict)
     return show_url_dict
 
+def create_theater_dict(theatre_url):
+    if theatre_url in CACHE_DICT.keys():
+        print("Using Cache")
+        text= CACHE_DICT[theatre_url]
+    else:
+        print("Fetching")
+        response = requests.get(theatre_url)
+        text=response.text
+        CACHE_DICT[theatre_url] = text
+        save_cache(CACHE_DICT)
+    theater_dict={}
+    soup = BeautifulSoup(text, 'html.parser')
+    try:
+        name= soup.find('div',class_='try-disp-table').h2.text.strip()
+    except:
+        name='None'
+    try:
+        address=soup.find('input',attrs={'name':'address','type':'hidden'})['value'].strip()
+    except:
+        address='None'
+    try:
+        city=soup.find('input',attrs={'name':'city','type':'hidden'})['value'].split(',')[0].strip()
+    except:
+        city='None'
+    try:
+        state=soup.find('input',attrs={'name':'city','type':'hidden'})['value'].split(',')[1].split()[0]
+    except:
+        state='None'
+    try:
+        zipcode=soup.find('input',attrs={'name':'city','type':'hidden'})['value'].split(',')[1].split()[1]
+    except:
+        zipcode='None'
+    try:
+        box_office_hours=soup.find('div',class_='box-office-hours').text.strip()
+    except:
+        box_office_hours='None'
+    try:
+        website=soup.find('input',attrs={'name':'website','type':'hidden'})['value'].strip()
+    except:
+        website='None'
+    try:
+        latitude=soup.find('input',attrs={'name':'latitude','type':'hidden'})['value'].strip()
+    except:
+        latitude='None'
+    try:
+        longitude=soup.find('input',attrs={'name':'longitude','type':'hidden'})['value'].strip()
+    except:
+        longitude='None'
+    theater_dict['name']=name
+    theater_dict['address']=address
+    theater_dict['city']=city
+    theater_dict['state']=state
+    theater_dict['zipcode']=zipcode
+    theater_dict['box_office_hours']=box_office_hours
+    theater_dict['website']=website
+    theater_dict['latitude']=latitude
+    theater_dict['longitude']=longitude
+    return theater_dict
 
 def create_theater_instance(theatre_url):
     if theatre_url in CACHE_DICT.keys():
@@ -151,7 +209,7 @@ def get_nearby_restaurants(theater_object):
         "longitude": longitude,
         "sort_by":'rating',
         "radius":4800,
-        "limit":10
+        "limit":30
     }
     request_key = construct_unique_key(base_url, params)
     if request_key in CACHE_DICT.keys():
@@ -171,6 +229,7 @@ def get_restaurant_list(site_object):
         result= get_nearby_restaurants(x[1])['businesses']
         for item in result:
             restaurant_info={}
+            restaurant_info['theater']=site_object.name
             restaurant_info['name']=item['name'] if item['name']!='' else "No name"
             restaurant_info['review_count']=item['review_count'] if item['review_count']!='' else None
             restaurant_info['raing']=item['rating'] if item['rating']!='' else None
@@ -232,6 +291,9 @@ if __name__ == "__main__":
     show_theatre_dict={}
     theater_info={}
     restaurant_dict={}
+    show_list=[]
+    theater_info_list=[]
+    restaurant_list=[]
     show_url_dict=build_show_url_dict()
     for value in show_url_dict.items():
         show_theatre_dict[value[0]]=build_theatre_url_dict(value[1])
@@ -239,27 +301,49 @@ if __name__ == "__main__":
         for theater in url_dict.items():
             if theater[0] not in theater_info.keys():
                 theater_info[theater[0]]=create_theater_instance(theater[1])
+                theater_info_list.append(create_theater_dict(theater[1]))
             else:
                 continue
+    for x in show_theatre_dict.items():
+        show_list.append(x[0])
+    #print(show_list)
     for x in theater_info.items():
-        restaurant_dict[x[0]]=get_restaurant_list(x[1])
-    # print(theater_info)
-
-    ## write into json
+        try: 
+            result= get_nearby_restaurants(x[1])['businesses']
+            for item in result:
+                restaurant_info={}
+                restaurant_info['theater']=x[1].name
+                restaurant_info['name']=item['name'] if item['name']!='' else "No name"
+                restaurant_info['review_count']=item['review_count'] if item['review_count']!='' else None
+                restaurant_info['raing']=item['rating'] if item['rating']!='' else None
+                try:
+                    restaurant_info['price']=item['price'] if item['rating']!='' else 'No price'
+                except: 
+                    restaurant_info['price'] ="No price"
+                restaurant_info['location']=item['location']['display_address'][0] if item['location']['display_address'][0]!='' else 'No address'
+                restaurant_info['phone']=item['display_phone'] if item['display_phone'] !='' else 'No phone number'
+                restaurant_list.append(restaurant_info)
+        except:
+            restaurant_list.append("No restaurants near this Theater.")
 
     dumped_show_theatre=json.dumps(show_theatre_dict)
-    fw = open('show_theatre.json',"w")
+    fw = open('data/show_theatre.json',"w")
     fw.write(dumped_show_theatre)
     fw.close()
 
-    # dumped_theater_info=json.dumps(theater_info)
-    # fw = open('theater_info.json',"w")
-    # fw.write(dumped_theater_info)
-    # fw.close()
+    dumped_theater_info=json.dumps(theater_info_list)
+    fw = open('data/theater_info.json',"w")
+    fw.write(dumped_theater_info)
+    fw.close()
 
-    dumped_restaurant_dict=json.dumps(restaurant_dict)
-    fw = open('restaurant_info.json',"w")
+    dumped_restaurant_dict=json.dumps(restaurant_list)
+    fw = open('data/restaurant_info.json',"w")
     fw.write(dumped_restaurant_dict)
+    fw.close()
+
+    dumped_show_list=json.dumps(show_list)
+    fw = open('data/musical_info.json',"w")
+    fw.write(dumped_show_list)
     fw.close()
 
 

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF8"/>
+    <title>Recommended restaurants: Results</title>
+</head>
+<body>
+    <h1>Here are 50 recommended restaurants!</h1>
+    <table>
+        <tr>
+            <th>Restaurant Name</th>
+            <th>Phone Number</th>
+            <th>Location</th>
+            <th>{{sort}}</th>
+        </tr>
+        {% for row in results %}
+        <tr>
+            <td>{{row[0]}}</td>
+            <td>{{row[1]}}</td>
+            <td>{{row[2]}}</td>
+            <td>{{row[3]}}</td>
+        </tr>
+        {% endfor %}
+
+    </table>
+
+    <p>
+        Return <a href='/'>home</a>.
+    </p>
+ 
+</body>
+</html>

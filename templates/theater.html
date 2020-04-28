@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF8"/>
+    <title>Touring Theater</title>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Here are Touring theater for this musical!</h1>
+    <p>If no information shows in the table, please enter a valid touring musical name</p>
+    <table>
+        <tr>
+            <th>Theater Name</th>
+            <th>City</th>
+            <th>State</th>
+            <th>Address</th>
+            <th>Zipcode</th>
+            <th>Official Website</th>
+        </tr>
+        {% for row in theater %}
+        <tr>
+            <td>{{row[0]}}</td>
+            <td>{{row[1]}}</td>
+            <td>{{row[2]}}</td>
+            <td>{{row[3]}}</td>
+            <td>{{row[4]}}</td>
+            <td>{{row[5]}}</td>
+        </tr>
+        {% endfor %}
+
+    </table>
+    <p>
+        Return <a href='/'>home</a>.
+    </p>
+
+ 
+</body>
+</html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF8"/>
+    <title>Broadway Touring Theater Restaurants Recommendation</title>
+</head>
+<body>
+    <h1>Welcome to Broadway Touring Theater Restaurants Recommendation!</h1>
+
+
+
+    <form action='/theater' method='POST'>
+
+    <p> What's your interested musical name? <input name="name" type="text"/></p>
+    <input type='submit' value='Get Theaters'/>
+    
+    </form>
+</br></br>
+
+
+    <form action='/musical' method='POST'>
+
+    <p> Hey! Do you want to see what other musicals will be performed in this theater? <input name="musical" type="text"/></p>
+    <input type='submit' value='Get other Musicals'/>
+    
+    </form>
+    </br></br>
+    
+
+    <form action='/results' method='POST'>
+    <p> Hey! Let's search restaurants for your chosen theater and musical!</p> 
+    <p>
+    Sort by: <br/>
+        <input type='radio' name='sort' 
+                value='rating' checked='checked'/> Ratings <br/>
+        <input type='radio' name='sort' 
+                value='price'/> Price <br/>
+        <input type='radio' name='sort' 
+                value='review_count'/> Reviews <br/>
+    </p>
+
+    <p>
+    Sort direction: <br/>
+        <input type='radio' name='dir'
+            value='desc' checked='checked'/>High to Low<br/>
+        <input type='radio' name='dir'
+            value='asc'/>Low to High<br/>
+    </p>
+
+    <p>
+        Filter by source region: <br/>
+            <select name='region'>
+                <option value='All'>All regions</option>
+                <option value='Hobby Center For The Performing Arts'>Hobby Center For The Performing Arts</option>
+                <option value='San Jose Center For The Performing Arts'>San Jose Center For The Performing Arts</option>
+                <option value='Buell Theatre'>Buell Theatre</option>
+                <option value='Des Moines Civic Center'>Des Moines Civic Center</option>
+                <option value='Andrew Jackson Hall At Tennessee Performing Arts Center'>Andrew Jackson Hall At Tennessee Performing Arts Center</option>
+                <option value='Durham Performing Arts Center'>Durham Performing Arts Center</option>
+                <option value='Forrest Theatre'>Forrest Theatre</option>
+                <option value='Proctors'>Proctors</option>
+                <option value='Uihlein Hall at Marcus Performing Arts Center'>Uihlein Hall at Marcus Performing Arts Center</option>
+                <option value='Fox Cities Performing Arts Center'>Fox Cities Performing Arts Center</option>
+                <option value='Dolby Theatre'>Dolby Theatre</option>
+                <option value='Bass Performance Hall'>Bass Performance Hall</option>
+                <option value='Academy Of Music: Kimmel Center'>Academy Of Music: Kimmel Center</option>
+                <option value='Providence Performing Arts Center'>Providence Performing Arts Center</option>
+                <option value='Detroit Opera House'>Detroit Opera House</option>
+                <option value='Fox Theatre'>Fox Theatre</option>
+                <option value='Benedum Center'>Benedum Center</option>
+                <option value='Saenger Theatre (LA)'>Saenger Theatre (LA)</option>
+                <option value='Segerstrom Center for the Arts'>Segerstrom Center for the Arts</option>
+                <option value='The Smith Center'>The Smith Center</option>
+                <option value='Paramount Theatre'>Paramount Theatre</option>
+                <option value='Keller Auditorium'>Keller Auditorium</option>
+                <option value='George S. and Dolores Doré Eccles Theater'>George S. and Dolores Doré Eccles Theater</option>
+                <option value='Orpheum Theater - Omaha'>Orpheum Theater - Omaha</option>
+                <option value='Orpheum Theatre - Minneapolis'>Orpheum Theatre - Minneapolis</option>
+                <option value='Fox Theatre - St. Louis'>Fox Theatre - St. Louis</option>
+                <option value='Hippodrome Theatre'>Hippodrome Theatre</option>
+                <option value="Shea's Performing Arts Center">Shea's Performing Arts Center</option>
+                <option value='DeVos Hall'>DeVos Hall</option>
+                <option value='Aronoff Center For The Arts: Procter & Gamble Hall'>Aronoff Center For The Arts: Procter & Gamble Hall</option>
+                <option value='Opera House (MA)'>Opera House (MA)</option>
+                <option value='Municipal Auditorium Music Hall'>Municipal Auditorium Music Hall</option>
+                <option value='Ahmanson Theatre'>Ahmanson Theatre</option>
+                <option value='Murat Centre'>Murat Centre</option>
+                <option value='Hershey Theatre'>Hershey Theatre</option>
+                <option value='Kentucky Center For The Performing Arts'>Kentucky Center For The Performing Arts</option>
+                <option value='ASU Gammage'>ASU Gammage</option>
+                <option value='Centennial Hall'>Centennial Hall</option>
+                <option value='Fisher Theatre'>Fisher Theatre</option>
+                <option value='Altria Theater'>Altria Theater</option>
+                <option value='David A. Straz, Jr. Center for the Performing Arts'>David A. Straz, Jr. Center for the Performing Arts</option>
+                <option value='Dr. Phillips Center for the Performing Arts'>Dr. Phillips Center for the Performing Arts</option>
+                <option value='Schuster Performing Arts Center: Mead Theatre'>Schuster Performing Arts Center: Mead Theatre</option>
+                <option value='Orpheum Theatre - Memphis'>Orpheum Theatre - Memphis</option>
+                <option value='Midland Center for the Arts'>Midland Center for the Arts</option>
+                <option value='Hammons Hall'>Hammons Hall</option>
+                <option value='Robinson Center Music Hall'>Robinson Center Music Hall</option>
+                <option value='Connor Palace'>Connor Palace</option>
+                <option value='Tennessee Theatre'>Tennessee Theatre</option>
+                <option value='Peace Center For The Performing Arts'>Peace Center For The Performing Arts</option>
+                <option value='Popejoy Hall'>Popejoy Hall</option>
+                <option value='Golden Gate Theatre'>Golden Gate Theatre</option>
+                <option value='Adrienne Arsht Center for the Performing Arts of Miami-Dade County'>Adrienne Arsht Center for the Performing Arts of Miami-Dade County</option>
+                <option value='Music Hall At Fair Park'>Music Hall At Fair Park</option>
+                <option value='Majestic Theatre - San Antonio'>Majestic Theatre - San Antonio</option>
+                <option value='Memorial Auditorium'>Memorial Auditorium</option>
+                <option value='Chapman Music Hall At Tulsa Performing Arts Center'>Chapman Music Hall At Tulsa Performing Arts Center</option>
+                <option value='Overture Center'>Overture Center</option>
+                <option value='Ohio Theatre'>Ohio Theatre</option>
+                <option value='Steven Tanger Center for the Performing Arts'>Steven Tanger Center for the Performing Arts</option>
+                <option value='Stranahan Theater And Great Hall'>Stranahan Theater And Great Hall</option>
+                <option value='Queen Elizabeth Theatre'>Queen Elizabeth Theatre</option>
+                <option value='Southern Alberta Jubilee Auditorium'>Southern Alberta Jubilee Auditorium</option>
+                <option value='Northern Alberta Jubilee Auditorium'>Northern Alberta Jubilee Auditorium</option>
+                <option value='Walton Arts Center'>Walton Arts Center</option>
+                <option value='Auditorium Theatre - Rochester'>Auditorium Theatre - Rochester</option>
+                <option value='Wharton Center for the Performing Arts'>Wharton Center for the Performing Arts</option>
+                <option value='James M. Nederlander Theatre'>James M. Nederlander Theatre</option>
+                <option value='Civic Center Music Hall'>Civic Center Music Hall</option>
+                <option value='Raymond F. Kravis Center For The Performing Arts'>Raymond F. Kravis Center For The Performing Arts</option>
+                <option value='National Arts Centre:  Opera Stage'>National Arts Centre:  Opera Stage</option>
+                <option value='KeyBank State Theatre'>KeyBank State Theatre</option>
+                <option value='Belk Theater'>Belk Theater</option>
+                <option value='Cadillac Palace Theatre'>Cadillac Palace Theatre</option>
+                <option value='Orpheum Theatre - San Francisco'>Orpheum Theatre - San Francisco</option>
+                <option value='Bass Concert Hall at University of Texas at Austin Performing Arts Center'>Bass Concert Hall at University of Texas at Austin Performing Arts Center</option>
+                <option value='Pantages Theatre - Los Angeles'>Pantages Theatre - Los Angeles</option>
+                <option value='Opera House (DC)'>Opera House (DC)</option>
+                <option value='Ovens Auditorium'>Ovens Auditorium</option>
+                <option value='Morrison Center for the Performing Arts'>Morrison Center for the Performing Arts</option>
+                <option value='Saroyan Theatre'>Saroyan Theatre</option>
+                <option value='Broward Center For The Performing Arts'>Broward Center For The Performing Arts</option>
+                <option value='Clowes Memorial Hall'>Clowes Memorial Hall</option>
+                <option value='Eisenhower Theatre'>Eisenhower Theatre</option>
+                <option value='Ellie Caulkins Opera House'>Ellie Caulkins Opera House</option>
+                <option value='Showcenter Complex'>Showcenter Complex</option>
+                <option value='AT&T Performing Arts Center'>AT&T Performing Arts Center</option>
+                <option value='National Theatre'>National Theatre</option>
+                <option value='James K. Polk Theater At Tennessee Performing Arts Center'>James K. Polk Theater At Tennessee Performing Arts Center</option>
+            </select>
+
+        </p>
+        <p>
+            <input type='checkbox' name='bar'/>Bar Chart<br/>
+        </p>  
+        <p>
+            <input type='checkbox' name='hist'/>Histogram Chart<br/>
+        </p>  
+
+    <input type='submit' value='Get Restaurants'/>
+
+    </form>
+
+</body>
+</html>
