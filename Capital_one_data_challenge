@@ -1,0 +1,68 @@
+# Capital-One-Data-Challenge 
+
+Documentation Data Challenge Capital One
+
+• Key Points:
+
+The analysis of this challenge has been done in jupyter notebook, and another HTML version
+
+• Capital_One_Data_Challenge.ipynb
+
+The notebooks contain sufficient explanations intent and insights in the analysis. 
+Please reach out directly at maamber@umich.edu for any issues.
+
+## Assumptions and Considerations:
+
+1) Assuming a constant occupancy rate of 75% thtoughout the year regardless traveling peak and holidays.
+
+2) Only 2 bedroom properties are considered as they are the most profitable
+
+3) Assuming that the rate of appreciation of the property in the past and future to be the same. I.e. the rate of appreciation between 2012-2017 will be same between 2017-2022.
+
+4) Assuming the rate of appreciation of the property and the rate of appreciation of the rental price will be same over the period of time.
+
+5) Removing columns having greater than 70 percent NULL values (Data quality is not good enough for those columns and choose to remove those columns) 70% seems to be a good cutoff for the attributes with have missing values. I came to this number while analyzing the data.
+
+6) Assumed Cost of property was increased from FY 2017 to FY 2019.
+ 
+
+## Metrics Created:
+
+**Yearly Expected Revenue :** 
+
+It's calculated by assuming occupancy rate of 75%.The value is assumed to be fixed. 
+Expected Revenue= price per night * No of days * occupancy rate = price per night * 365 * 75%
+
+**Breakeven Period:**
+
+Breakeven Period is number of years required to earn back initial investment cost, which is calculated by: 
+Breakeven Period= Fixed cost/Yearly Expected Revenue
+
+**Rate:**
+
+Based on our analysis, we can see that properties value inflated and depreciate depending on the neighborhood and time. From Zillow dataset, we can extract historical average median house price for 24 zip codes in New York City from 1996-06 to 2017-06, and we can see they have overall upward trend. Because the price data of AirBnB is at 2019-07, we need to estimate the house price in 2019 as cost. Here, I calculated appreciation rate over 12-year period on Home value. (Appreciation rate is an increase in the value of an assert over time). 
+After we get the rate, we can use the same logic to estimate FY2019 housing prices. The equation is FV=PV *(1+r)^n
+Because there're so many unpredictable factors to influence the housing price, like the rate of appreciation, pandemic, economic situation, political issue etc. The simpler way could avoid noisy data and overfitting. I tried several regression models but MSE score is super large, and Time Series Model need to consider seasonality, trend, and other components, which needs more data and information to get accurate results. So I chose this approach to capture the trend of property by zip codes over two years.
+I created a new data frame to calculate those new metrics to evaluate and rank different zip codes. Higher value of Expected Revenue indicates that the investment within this Zip code will have a good profit and a better return on investment. Lesser is the value of breakeven Period, better is the property within this Zip code because we can recover investment and earning profits sooner.
+
+
+## Data Quality and Processing Key Points:
+
+1) select columns of interests in our analysis
+
+2) Handling of missing values in the Data and doing necessary imputations.
+
+3) Subset the data further as per needs for visualization
+
+## Methodology: 
+
+### Airbnb Data:
+
+Airbnb dataset contains information on property listings such as location details, number of bedrooms, room types, services, host details, cleaning fee, rent price details, reviews and ratings
+
+### Zillow Data :
+
+Zillow dataset provides selling cost for two-bedroom properties in each zipcode for various cities. The cost has been shown from April 1996 to June 2017.
+
+### Analysis
+I analyze this problem from 3 perspectives: market segmentation, market trend, and breakeven analysis/ROI.
